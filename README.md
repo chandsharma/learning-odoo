@@ -1,2 +1,1 @@
 # learning-odoo
-# learning-odoo
