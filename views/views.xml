@@ -1,60 +1,105 @@
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="hospital_management.list">
-      <field name="name">hospital_management list</field>
-      <field name="model">hospital_management.hospital_management</field>
+    <record id="patient_list_view" model="ir.ui.view">
+      <field name="name">patent.list.view</field>
+      <field name="model">hospital.patients</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
+          <field name="name" />
+          <field name="image" 
+          widget="image" 
+          class="oe_avatar"
+          />
+          <field name="dob" />
+          <field name="age" />
+          <field name="diseases" />
         </tree>
       </field>
     </record>
--->
 
-    <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="hospital_management.action_window">
-      <field name="name">hospital_management window</field>
-      <field name="res_model">hospital_management.hospital_management</field>
-      <field name="view_mode">tree,form</field>
-    </record>
--->
-
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="hospital_management.action_server">
-      <field name="name">hospital_management server</field>
-      <field name="model_id" ref="model_hospital_management_hospital_management"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
+    <record id="patient_form_view" model="ir.ui.view">
+      <field name="name">patient.form.view</field>
+      <field name="model">hospital.patients</field>
+      <field name="arch" type="xml">
+        <form string="">
+          <sheet>
+            <group>
+              <field name="name" />
+              <field name="image" 
+              widget="image" 
+              class="oe_avatar"
+               />
+              <field name="dob" />
+              <field name="age" readonly="1" />
+              <field name="diseases" />
+            </group>
+          </sheet>
+        </form>
       </field>
     </record>
--->
+    <!-- staffkjfvnjjkvnjkdfnvjkdfvnjdfknvdjfkvnfjnv -->
+    <record id="staff_list_view" model="ir.ui.view">
+      <field name="name">staff.list.view</field>
+      <field name="model">hospital.staff</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name" />
+          <field name="dob" />
+          <field name="age" />
+        </tree>
+      </field>
+    </record>
 
-    <!-- Top menu item -->
-<!--
-    <menuitem name="hospital_management" id="hospital_management.menu_root"/>
--->
-    <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="hospital_management.menu_1" parent="hospital_management.menu_root"/>
-    <menuitem name="Menu 2" id="hospital_management.menu_2" parent="hospital_management.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="hospital_management.menu_1_list" parent="hospital_management.menu_1"
-              action="hospital_management.action_window"/>
-    <menuitem name="Server to list" id="hospital_management" parent="hospital_management.menu_2"
-              action="hospital_management.action_server"/>
--->
-  </data>
+    <record id="staff_form_view" model="ir.ui.view">
+      <field name="name">staff.form.view</field>
+      <field name="model">hospital.staff</field>
+      <field name="arch" type="xml">
+        <form string="">
+          <sheet>
+            <group>
+              <field name="name" />
+              <field name="dob" />
+              <field name="age" readonly="1" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="patient_action" model="ir.actions.act_window">
+      <field name="name">Patient</field>
+      <field name="res_model">hospital.patients</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="staff_action" model="ir.actions.act_window">
+      <field name="name">Staff</field>
+      <field name="res_model">hospital.staff</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+     
+    <menuitem
+      id="root_hospital_menu"
+      name="Hospital"
+      
+    />
+
+    <menuitem
+      id="patient_menu"
+      name="Patient"
+      action="patient_action"
+      parent="root_hospital_menu"
+    />
+
+    <menuitem
+      id="staff_menu"
+      name="Staff"
+      action="staff_action"
+      parent="root_hospital_menu"
+    />
+    <!-- <menuitem
+      id="patient_profile_menu"
+      action="hospital_action"
+      parent="patient_menu"
+    /> -->
+
 </odoo>
