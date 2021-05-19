@@ -69,7 +69,7 @@
               <field name="age" readonly="1" />
               <field name="entry_time" />
                <field name="exit_time" />
-              <!-- <field name="patient_assigned" /> -->
+              <field name="patient_assigned" readonly="1" />
             </group>
           </sheet>
         </form>
@@ -106,6 +106,38 @@
         </form>
       </field>
     </record>
+
+    <!--  appointmentsssssss -->
+<record id="appointment_list_view" model="ir.ui.view">
+      <field name="name">appointment.list.view</field>
+      <field name="model">hospital.appointment</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="pat_id" />
+          <field name="doc_id" />
+          <field name="time" />
+          <field name="staatus" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="appointment_form_view" model="ir.ui.view">
+      <field name="name">appointment.form.view</field>
+      <field name="model">hospital.appointment</field>
+      <field name="arch" type="xml">
+        <form string="">
+          <sheet>
+            <group>
+              <field name="pat_id" />
+              <field name="doc_id" />
+              <field name="time" />
+              <field name="staatus" />
+              <!-- <field name="patient_assigned" /> -->
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
 <!-- menu top -->
     <record id="patient_action" model="ir.actions.act_window">
       <field name="name">Patient</field>
@@ -124,11 +156,17 @@
       <field name="res_model">hospital.doctor</field>
       <field name="view_mode">tree,form</field>
     </record>
+
+    <record id="appointment_action" model="ir.actions.act_window">
+      <field name="name">Appointment</field>
+      <field name="res_model">hospital.appointment</field>
+      <field name="view_mode">tree,form</field>
+    </record>
      
     <menuitem
       id="root_hospital_menu"
       name="Hospital"
-      
+      action="appointment_action"
     />
 
     <menuitem

@@ -8,13 +8,14 @@ class hospital_patients (models.Model):
 
     #@api.onchange('dob')
     def _age(self):
-        if self.dob:
-            dob = datetime.strptime(str(self.dob), "%Y-%m-%d")
-            age_calc = (datetime.today() - dob).days/365
-            print('\n\n\n')
-            print(str(self.dob))
-            print(int(age_calc))
-            self.age = int(age_calc)
+        for i in self:
+            if i.dob:
+                dob = datetime.strptime(str(i.dob), "%Y-%m-%d")
+                age_calc = (datetime.today() - dob).days/365
+                print('\n\n\n')
+                print(str(i.dob))
+                print(int(age_calc))
+                i.age = int(age_calc)
 
     name = fields.Char(
         string='name',
@@ -67,3 +68,11 @@ class hospital_doctor (models.Model):
     dob = fields.Date(string='DOB')
     age = fields.Integer(string='Age (years)',compute="_age")
     speciality = fields.Selection(string='speciality', selection=[('cardio', 'Cardio'),('ortho','Ortho'),('neuro','Neuro'),('uro','Uro'),('gyno','Gyno'),('dento','Dento')])
+
+class hospital_appointment (models.Model):
+    _name = 'hospital.appointment'
+
+    pat_id = fields.Many2one('hospital.patients',  ondelete='restrict',String="Patient")
+    doc_id = fields.Many2one('hospital.doctor',  ondelete='restrict',String="Doctor")
+    time = fields.Datetime(string='Time')
+    staatus = fields.Selection(string='Status', selection=[('pending', 'Pending'),('done','Done')], default='pending')
