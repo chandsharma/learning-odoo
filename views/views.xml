@@ -1,4 +1,5 @@
 <odoo>
+<!-- patients -->
     <record id="patient_list_view" model="ir.ui.view">
       <field name="name">patent.list.view</field>
       <field name="model">hospital.patients</field>
@@ -12,6 +13,8 @@
           <field name="dob" />
           <field name="age" />
           <field name="diseases" />
+          <field name="staff_id" />
+
         </tree>
       </field>
     </record>
@@ -31,6 +34,8 @@
               <field name="dob" />
               <field name="age" readonly="1" />
               <field name="diseases" />
+              <field name="staff_id" />
+
             </group>
           </sheet>
         </form>
@@ -45,6 +50,9 @@
           <field name="name" />
           <field name="dob" />
           <field name="age" />
+          <field name="entry_time" />
+          <field name="exit_time" />
+          <field name="patient_assigned" />
         </tree>
       </field>
     </record>
@@ -59,12 +67,46 @@
               <field name="name" />
               <field name="dob" />
               <field name="age" readonly="1" />
+              <field name="entry_time" />
+               <field name="exit_time" />
+              <!-- <field name="patient_assigned" /> -->
             </group>
           </sheet>
         </form>
       </field>
     </record>
+<!--  doctor -->
+<record id="doctor_list_view" model="ir.ui.view">
+      <field name="name">doctor.list.view</field>
+      <field name="model">hospital.doctor</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name" />
+          <field name="dob" />
+          <field name="age" />
+          <field name="speciality" />
+        </tree>
+      </field>
+    </record>
 
+    <record id="doctor_form_view" model="ir.ui.view">
+      <field name="name">doctor.form.view</field>
+      <field name="model">hospital.doctor</field>
+      <field name="arch" type="xml">
+        <form string="">
+          <sheet>
+            <group>
+              <field name="name" />
+              <field name="dob" />
+              <field name="age" readonly="1" />
+              <field name="speciality" />
+              <!-- <field name="patient_assigned" /> -->
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+<!-- menu top -->
     <record id="patient_action" model="ir.actions.act_window">
       <field name="name">Patient</field>
       <field name="res_model">hospital.patients</field>
@@ -74,6 +116,12 @@
     <record id="staff_action" model="ir.actions.act_window">
       <field name="name">Staff</field>
       <field name="res_model">hospital.staff</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="doctor_action" model="ir.actions.act_window">
+      <field name="name">Doctor</field>
+      <field name="res_model">hospital.doctor</field>
       <field name="view_mode">tree,form</field>
     </record>
      
@@ -94,6 +142,13 @@
       id="staff_menu"
       name="Staff"
       action="staff_action"
+      parent="root_hospital_menu"
+    />
+
+    <menuitem
+      id="doctor_menu"
+      name="Doctor"
+      action="doctor_action"
       parent="root_hospital_menu"
     />
     <!-- <menuitem
