@@ -45,10 +45,8 @@ class hospital_staff (models.Model):
         string='name',)
     dob = fields.Date(string='DOB')
     age = fields.Integer(string='Age (years)',compute="_age")
-    entry_time = fields.Datetime(
-        string='Entry',)
-    exit_time = fields.Datetime(
-        string='Exit', )
+    entry_time = fields.Float(string='Entry', )#compute="_compute_time")
+    exit_time = fields.Float(string='Exit', )#compute="_compute_time")
     salary = fields.Integer(string='Salary')
     patient_assigned = fields.One2many('hospital.patients','staff_id', String="Patients Assigned")
 
@@ -74,5 +72,5 @@ class hospital_appointment (models.Model):
 
     pat_id = fields.Many2one('hospital.patients',  ondelete='restrict',String="Patient")
     doc_id = fields.Many2one('hospital.doctor',  ondelete='restrict',String="Doctor")
-    time = fields.Datetime(string='Time')
+    time = fields.Float(string='Time',)# compute="_compute_time")
     staatus = fields.Selection(string='Status', selection=[('pending', 'Pending'),('done','Done')], default='pending')

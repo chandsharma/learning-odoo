@@ -50,8 +50,8 @@
           <field name="name" />
           <field name="dob" />
           <field name="age" />
-          <field name="entry_time" />
-          <field name="exit_time" />
+          <field name="entry_time" widget="float_time"/>
+          <field name="exit_time" widget="float_time"/>
           <field name="patient_assigned" />
         </tree>
       </field>
@@ -67,8 +67,8 @@
               <field name="name" />
               <field name="dob" />
               <field name="age" readonly="1" />
-              <field name="entry_time" />
-               <field name="exit_time" />
+              <field name="entry_time" widget="float_time"/>
+               <field name="exit_time" widget="float_time"/>
               <field name="patient_assigned" readonly="1" />
             </group>
           </sheet>
@@ -115,7 +115,7 @@
         <tree>
           <field name="pat_id" />
           <field name="doc_id" />
-          <field name="time" />
+          <field name="time" widget="float_time"/>
           <field name="staatus" />
         </tree>
       </field>
@@ -130,7 +130,7 @@
             <group>
               <field name="pat_id" />
               <field name="doc_id" />
-              <field name="time" />
+              <field name="time" widget="float_time"/>
               <field name="staatus" />
               <!-- <field name="patient_assigned" /> -->
             </group>
