@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 from odoo import models, fields, api
 from datetime import date, datetime
 
@@ -74,10 +75,19 @@ class hospital_appointment (models.Model):
     doc_id = fields.Many2one('hospital.doctor',  ondelete='restrict',String="Doctor")
     time = fields.Float(string='Time',)# compute="_compute_time")
     staatus = fields.Selection(string='Status', selection=[('pending', 'Pending'),('done','Done')], default='pending')
-    #disc
-    #charges
     discription = fields.Char(string="Discription")
     amount = fields.Float(string='Amount')
+
+    @api.model
+    def create(self, values):
+        exists = self.env['hospital.appointment'].search([('pat_id','=',values['pat_id']),('doc_id','=',values['doc_id'])])
+        if exists:
+            print('appointment already exist')
+        rt = super(hospital_appointment,self).create(values)
+        print(self)
+        print(values)
+        print(rt)
+        return rt
 
 # soft delete appointments
 # check and over-write create()
@@ -91,7 +101,7 @@ class hospital_genadd(models.Model):
         string='Gender',
         selection=[('male', 'Male'), ('female', 'Female'), ('nonbianry', 'Non-Binary')])
     
-class hospital_genadd(models.Model):
+class hospital_gena(models.Model):
     _inherit = 'hospital.staff'
 
     address = fields.Char(string="Address")
@@ -100,7 +110,7 @@ class hospital_genadd(models.Model):
         string='Gender',
         selection=[('male', 'Male'), ('female', 'Female'), ('nonbianry', 'Non-Binary')])
     
-class hospital_genadd(models.Model):
+class hospital_genad(models.Model):
     _inherit = 'hospital.doctor'
 
     address = fields.Char(string="Address")
