@@ -74,3 +74,21 @@ class hospital_appointment (models.Model):
     doc_id = fields.Many2one('hospital.doctor',  ondelete='restrict',String="Doctor")
     time = fields.Float(string='Time',)# compute="_compute_time")
     staatus = fields.Selection(string='Status', selection=[('pending', 'Pending'),('done','Done')], default='pending')
+    #disc
+    #charges
+    discription = fields.Char(string="Discription")
+    amount = fields.Float(string='Amount')
+
+# soft delete appointments
+# check and over-write create()
+
+# class hospital_genadd(models.Model):
+#     _name = 'hospital.genadd'
+#     _inherit = ['hospital.genadd','hospital.patients','hospital.staff','hospital.doctor']
+
+#     address = fields.Char(string="Address")
+    
+#     gender = fields.Selection(
+#         string='Gender',
+#         selection=[('male', 'Male'), ('female', 'Female'), ('nonbianry', 'Non-Binary')])
+    
