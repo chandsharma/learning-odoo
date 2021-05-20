@@ -82,13 +82,29 @@ class hospital_appointment (models.Model):
 # soft delete appointments
 # check and over-write create()
 
-# class hospital_genadd(models.Model):
-#     _name = 'hospital.genadd'
-#     _inherit = ['hospital.genadd','hospital.patients','hospital.staff','hospital.doctor']
+class hospital_genadd(models.Model):
+    _inherit = 'hospital.patients'
 
-#     address = fields.Char(string="Address")
+    address = fields.Char(string="Address")
     
-#     gender = fields.Selection(
-#         string='Gender',
-#         selection=[('male', 'Male'), ('female', 'Female'), ('nonbianry', 'Non-Binary')])
+    gender = fields.Selection(
+        string='Gender',
+        selection=[('male', 'Male'), ('female', 'Female'), ('nonbianry', 'Non-Binary')])
     
+class hospital_genadd(models.Model):
+    _inherit = 'hospital.staff'
+
+    address = fields.Char(string="Address")
+    
+    gender = fields.Selection(
+        string='Gender',
+        selection=[('male', 'Male'), ('female', 'Female'), ('nonbianry', 'Non-Binary')])
+    
+class hospital_genadd(models.Model):
+    _inherit = 'hospital.doctor'
+
+    address = fields.Char(string="Address")
+    
+    gender = fields.Selection(
+        string='Gender',
+        selection=[('male', 'Male'), ('female', 'Female'), ('nonbianry', 'Non-Binary')])
