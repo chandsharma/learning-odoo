@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="inheritgenadd_tree">
+            <field name="name">inheritgenadd.tree</field>
+            <field name="model">hospital.patients</field>
+            <field name="inherit_id" ref="patient_list_view"/>
+            <field name="arch" type="xml">
+                <tree position="inside">
+                    <field name="gender" />
+                    <field name="address" />
+                  </tree>
+            </field>
+        </record>
+    </data>
+    <data>
+        <record model="ir.ui.view" id="inheritgenadd_form">
+            <field name="name">inheritgenadd.form</field>
+            <field name="model">hospital.patients</field>
+            <field name="inherit_id" ref="patient_form_view"/>
+            <field name="arch" type="xml">
+                <form position="inside">
+                <sheet>
+                 <group>
+                    <field name="gender" />
+                    <field name="address" />
+                    
+                    </group>
+                    </sheet>
+                  </form>
+            </field>
+        </record>
+    </data>
+
+    <!-- staffssss -->
+    <data>
+        <record model="ir.ui.view" id="inheritgenad_tree">
+            <field name="name">inheritgenad.tree</field>
+            <field name="model">hospital.staff</field>
+            <field name="inherit_id" ref="staff_list_view"/>
+            <field name="arch" type="xml">
+                <tree position="inside">
+                    <field name="gender" />
+                    <field name="address" />
+                  </tree>
+            </field>
+        </record>
+    </data>
+    <data>
+        <record model="ir.ui.view" id="inheritgenad_form">
+            <field name="name">inheritgenad.form</field>
+            <field name="model">hospital.staff</field>
+            <field name="inherit_id" ref="staff_form_view"/>
+            <field name="arch" type="xml">
+                <form position="inside">
+                <sheet>
+                 <group>
+                    <field name="gender" />
+                    <field name="address" />
+                    
+                    </group>
+                    </sheet>
+                  </form>
+            </field>
+        </record>
+    </data>
+    <!-- doctorsssss -->
+    <data>
+        <record model="ir.ui.view" id="inheritgena_tree">
+            <field name="name">inheritgena.tree</field>
+            <field name="model">hospital.doctor</field>
+            <field name="inherit_id" ref="doctor_list_view"/>
+            <field name="arch" type="xml">
+                <tree position="inside">
+                    <field name="gender" />
+                    <field name="address" />
+                  </tree>
+            </field>
+        </record>
+    </data>
+    <data>
+        <record model="ir.ui.view" id="inheritgena_form">
+            <field name="name">inheritgena.form</field>
+            <field name="model">hospital.doctor</field>
+            <field name="inherit_id" ref="doctor_form_view"/>
+            <field name="arch" type="xml">
+                <form position="inside">
+                <sheet>
+                 <group>
+                    <field name="gender" />
+                    <field name="address" />
+                    
+                    </group>
+                    </sheet>
+                  </form>
+            </field>
+        </record>
+    </data>
+</odoo>
