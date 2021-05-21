@@ -3,6 +3,7 @@
 
 from odoo import models, fields, api
 from datetime import date, datetime
+from odoo.exceptions import UserError,ValidationError
 
 class hospital_patients (models.Model):
     _name = 'hospital.patients'
@@ -83,6 +84,7 @@ class hospital_appointment (models.Model):
         exists = self.env['hospital.appointment'].search([('pat_id','=',values['pat_id']),('doc_id','=',values['doc_id'])])
         if exists:
             print('appointment already exist')
+            raise UserError('Appointment already exists!')
         rt = super(hospital_appointment,self).create(values)
         print(self)
         print(values)
