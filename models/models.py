@@ -8,15 +8,12 @@ from odoo.exceptions import UserError,ValidationError
 class hospital_patients (models.Model):
     _name = 'hospital.patients'
 
-    #@api.onchange('dob')
+    # @api.onchange('dob')
     def _age(self):
         for i in self:
             if i.dob:
                 dob = datetime.strptime(str(i.dob), "%Y-%m-%d")
                 age_calc = (datetime.today() - dob).days/365
-                print('\n\n\n')
-                print(str(i.dob))
-                print(int(age_calc))
                 i.age = int(age_calc)
 
     name = fields.Char(
@@ -28,6 +25,15 @@ class hospital_patients (models.Model):
     age = fields.Integer(string='Age (years)',compute="_age")
     # name = fields.Char(default=lambda self: self._default_name())
     staff_id = fields.Many2one('hospital.staff',  ondelete='restrict',String="Staff Assigned")
+
+    def name_get(self):
+        l = []
+        for p in self:
+            name = p.name
+            name += " ({})".format(p.age)
+            l.append((p.id,name))
+        print(l)
+        return l
 
 
 class hospital_staff (models.Model):
@@ -68,6 +74,15 @@ class hospital_doctor (models.Model):
     dob = fields.Date(string='DOB')
     age = fields.Integer(string='Age (years)',compute="_age")
     speciality = fields.Selection(string='speciality', selection=[('cardio', 'Cardio'),('ortho','Ortho'),('neuro','Neuro'),('uro','Uro'),('gyno','Gyno'),('dento','Dento')])
+    
+    def name_get(self):
+        l = []
+        for d in self:
+            name = d.name
+            name += " ({})".format(d.speciality)
+            l.append((d.id,name))
+        print(l)
+        return l
 
 class hospital_appointment (models.Model):
     _name = 'hospital.appointment'
@@ -82,14 +97,19 @@ class hospital_appointment (models.Model):
     @api.model
     def create(self, values):
         exists = self.env['hospital.appointment'].search([('pat_id','=',values['pat_id']),('doc_id','=',values['doc_id'])])
+        #check status pending
         if exists:
-            print('appointment already exist')
             raise UserError('Appointment already exists!')
         rt = super(hospital_appointment,self).create(values)
         print(self)
         print(values)
         print(rt)
         return rt
+
+    def testbutton(self):
+        pass
+
+    
 
 # soft delete appointments
 # check and over-write create()
