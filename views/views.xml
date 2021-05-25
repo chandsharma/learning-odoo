@@ -126,8 +126,10 @@
       <field name="name">appointment.list.view</field>
       <field name="model">hospital.appointment</field>
       <field name="arch" type="xml">
-        <tree>
-          <field name="pat_id" />
+      
+        <tree create="false">
+        <!-- <button name="create" type="object" string="Add" class="btn-default" /> -->
+              <field name="pat_id" />
           <field name="doc_id" />
           <field name="time" widget="float_time"/>
           <field name="discription" />
@@ -141,7 +143,7 @@
       <field name="name">appointment.form.view</field>
       <field name="model">hospital.appointment</field>
       <field name="arch" type="xml">
-        <form string="">
+        <form string="" create="false">
           <sheet>
             <group>
               <field name="pat_id" />
