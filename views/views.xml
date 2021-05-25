@@ -70,13 +70,18 @@
       <field name="arch" type="xml">
         <form string="">
           <sheet>
+            <div class="oe_button_box">
+          <button class="oe_stat_button" name="button_employee" string="Salary" context="{'popup': True}" icon="fa-rupee">
+          <field name="salary" />
+          </button>
+            </div>
             <group>
               <field name="name" />
               <field name="dob" />
               <field name="age" readonly="1" />
               <!-- <field name="address" />
           <field name="gender" /> -->
-          <field name="salary" />
+          <!-- <field name="salary" /> -->
               <field name="entry_time" widget="float_time"/>
                <field name="exit_time" widget="float_time"/>
               <field name="patient_assigned" readonly="1" />
