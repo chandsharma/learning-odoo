@@ -35,7 +35,7 @@
         <field name="res_model">hospital.appointment</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="ppointment_wizard"/>
-        <field name="target">new</field>
+        <!-- <field name="target">new</field> -->
     </record>
 
 </odoo>
