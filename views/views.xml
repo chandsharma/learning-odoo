@@ -134,7 +134,7 @@
       <field name="model">hospital.appointment</field>
       <field name="arch" type="xml">
      
-        <tree create="false">
+        <tree default_order="staatus desc, time" create="false">
         <!-- <header> -->
         <!-- <button name="testbutton"  string="Add"  type="object" class="oe_highlight"/> -->
         <!-- </header> -->
