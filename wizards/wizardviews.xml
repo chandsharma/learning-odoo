@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="ppointment_wizard" model="ir.ui.view">
+            <field name="name">ppointment.wizard</field>
+            <field name="model">hospital.appointment</field>
+            <field name="arch" type="xml">
+                <form>
+                <group>
+                    <field name="pat_id" />
+                    <field name="doc_id" />
+                    <field name="time" widget="float_time"/>
+                    <field name="discription" />
+                    <field name="amount" />
+                    <field name="staatus" />
+                    <!-- <field name="patient_assigned" /> -->
+                </group>
+                    <footer>
+                        <button name="create"
+                            string="Add"
+                            type="object"
+                            class="oe_highlight"
+                            />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+
+    <record id= "wizard_app_act" model="ir.actions.act_window">
+        <field name="name">Add_Appointment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.appointment</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="ppointment_wizard"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

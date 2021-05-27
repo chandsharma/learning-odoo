@@ -89,6 +89,7 @@ class hospital_appointment (models.Model):
 
     pat_id = fields.Many2one('hospital.patients',  ondelete='restrict',String="Patient")
     doc_id = fields.Many2one('hospital.doctor',  ondelete='restrict',String="Doctor")
+    pic = fields.Binary(related='pat_id.image')
     time = fields.Float(string='Time',)# compute="_compute_time")
     staatus = fields.Selection(string='Status', selection=[('pending', 'Pending'),('done','Done')], default='pending')
     discription = fields.Char(string="Discription")

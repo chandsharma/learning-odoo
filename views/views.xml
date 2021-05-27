@@ -8,6 +8,7 @@
           <field name="name" />
           <field name="image" 
           widget="image" 
+              width='70px'
           class="oe_avatar"
           />
           <field name="dob" />
@@ -132,11 +133,15 @@
       <field name="model">hospital.appointment</field>
       <field name="arch" type="xml">
      
-        <tree create="true">
+        <tree create="false">
         <!-- <header> -->
         <!-- <button name="testbutton"  string="Add"  type="object" class="oe_highlight"/> -->
         <!-- </header> -->
               <field name="pat_id" />
+              <field name="pic" 
+              widget='image'
+              width='70px'
+              class="oe_avatar"/>
           <field name="doc_id" />
           <field name="time" widget="float_time"/>
           <field name="discription" />
@@ -153,8 +158,8 @@
       <field name="arch" type="xml">
         <form string="" create="false">
         <header>
-        <button name="testbutton"  string="Add"  type="object" class="oe_highlight"/>
-
+        <button name="%(hospital_management.wizard_app_act)d" type="action" string="Add Appointment" class="oe_highlight"/>
+        <!-- <button name="testbutton"  string="Add Appointment"  type="actiomn" class="oe_highlight"/> -->
         </header>
           <sheet>
             <group>
