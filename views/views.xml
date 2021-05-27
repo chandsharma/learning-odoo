@@ -57,10 +57,11 @@
           <field name="age" />
           <!-- <field name="address" />
           <field name="gender" /> -->
-          <field name="salary" />
+          
           <field name="entry_time" widget="float_time"/>
           <field name="exit_time" widget="float_time"/>
           <field name="patient_assigned" />
+          <field name="salary" sum="Total Tax included" widget="monetary"/>
         </tree>
       </field>
     </record>
