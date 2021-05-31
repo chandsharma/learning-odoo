@@ -1,16 +1,17 @@
 <odoo>
     <data>
-<!--
+
         <template id="listing">
           <ul>
             <li t-foreach="objects" t-as="object">
-              <a t-attf-href="#{ root }/objects/#{ object.id }">
+              <a t-attf-href="#{ root }/id/#{ object.id }">
                 <t t-esc="object.display_name"/>
               </a>
             </li>
           </ul>
         </template>
         <template id="object">
+        <a href="/hospital/appointments/">Appointments</a>
           <h1><t t-esc="object.display_name"/></h1>
           <dl>
             <t t-foreach="object._fields" t-as="field">
@@ -19,6 +20,6 @@
             </t>
           </dl>
         </template>
--->
+
     </data>
 </odoo>
