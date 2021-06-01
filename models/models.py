@@ -99,10 +99,23 @@ class hospital_appointment (models.Model):
     def create(self, values):
         # print(type(values),values)
         # print(type(values),values)
-        exists = self.env['hospital.appointment'].search([('pat_id','=',values['pat_id']),('doc_id','=',values['doc_id']),('staatus','=','pending')])
-        #check status pending
-        if exists:
-            raise UserError('Appointment already exists!')
+        # exists = self.env['hospital.appointment'].search([('pat_id','=',values['pat_id']),('doc_id','=',values['doc_id']),('staatus','=','pending')])
+        # #check status pending
+        # if exists:
+        #     raise UserError('Appointment already exists!')
+        # print('\n\n\nhere\n\n\n',values)
+        rt = super(hospital_appointment,self).create(values)
+        return rt
+
+    
+    def add_appointment(self, values):
+        # print(type(values),values)
+        # print(type(values),values)
+        # exists = self.env['hospital.appointment'].search([('pat_id','=',values['pat_id']),('doc_id','=',values['doc_id']),('staatus','=','pending')])
+        # #check status pending
+        # if exists:
+        #     raise UserError('Appointment already exists!')
+        print('\n\n\nthere\n\n\n')
         rt = super(hospital_appointment,self).create(values)
         return rt
 

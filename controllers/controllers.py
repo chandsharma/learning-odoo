@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from odoo import http
-from odoo.http import request
+from odoo.http import request,Response
 import json
+from odoo.tools import date_utils 
 
 class HospitalManagement(http.Controller):
     @http.route('/hospital/', auth='public')
@@ -9,45 +10,58 @@ class HospitalManagement(http.Controller):
         # return "Hello, world"
         return "Hello world"
 
-    @http.route('/hospital/appointments/', csrf='False', auth='public', methods=['GET'])
+    @http.route('/hospital/appointments/', csrf=False, auth='public', methods=['GET'])
     def list(self, **kw):
-        # ass = http.request.env['hospital.appointment'].search([])
-        # # res = {}
-        # # print(type(res))
+        ass = http.request.env['hospital.appointment'].sudo().search([])
+        # res = {}
+        # print(type(res))
         # for aa in ass:
         #     for a in aa._fields:
         #         print(a,aa[a])
-        # return json.dumps(res)
-        return http.request.render('hospital_management.listing', {
-            'root': '/hospital/appointments',
-            'objects': http.request.env['hospital.appointment'].sudo().search([]),
-        })
+        return Response(json.dumps(ass.read(),default=date_utils.json_default ),content_type='application/json',status=200) 
+        # return http.request.render('hospital_management.listing', {
+        #     'root': '/hospital/appointments',
+        #     'objects': http.request.env['hospital.appointment'].sudo().search([]),
+        # })
 
-    @http.route('/hospital/appointments/id/<model("hospital.appointment"):obj>/', auth='public', methods=['GET'])
+    @http.route('/hospital/appointments/<int:obj>/', auth='public', methods=['GET'],csrf=False)
     def object(self, obj, **kw):
-        return http.request.render('hospital_management.object', {
-            'object': obj
-        })
+        # return http.request.render('hospital_management.object', {
+        #     'object': obj
+        # })
+        record = request.env['hospital.appointment'].sudo().search([('id','=',obj)])
+        # print(type(record.read()))
+        return Response(json.dumps(record.read(),default=date_utils.json_default ),content_type='application/json',status=200) 
 
-    @http.route('/hospital/appointments/', csrf='False', type='json', auth='public', methods=['POST'])
-    def create_appointments(self, obj, **kw):
-        if self.env['hospital.appointment'].search([('pat_id','=',kw['pat_id']),('doc_id','=',kw['doc_id']),('staatus','=','pending')]):
-            return "Already Exists"
+    @http.route('/hospital/appointments/', type='json', auth='public', methods=['POST'],csrf=False)
+    def create_appointments(self, **kw):
+        if 0:#request.env['hospital.appointment'].sudo().search([('pat_id','=',kw['pat_id']),('doc_id','=',kw['doc_id']),('staatus','=','pending')]):
+            return Response(json.dumps({'create':False}),content_type='application/json',status=200) 
+
         else:
-            return http.request.env['hospital.appointment'].sudo().create(kw)
+            print(request.jsonrequest)
+            record = http.request.env['hospital.appointment'].sudo().create(request.jsonrequest)
+            rec  = request.env['hospital.appointment'].sudo().search([('id','=',record.id)])
+            print(type(rec.read()),rec.read())
+        return Response(json.dumps(record.read(),default=date_utils.json_default ),content_type='application/json',status=200) 
 
-    @http.route('/hospital/appointments/<model("hospital.appointment"):obj>/', type='json', auth='public', methods=['PUT'], crpf='False')
+            
+
+    @http.route('/hospital/appointments/<int:obj>/', type='json', auth='public', methods=['PUT'], csrf=False)
     def update_appointments(self, obj, **kw):
-        if self.env['hospital.appointment'].sudo().search([('id','=',obj)]):
-            http.request.env['hospital.appointment'].sudo().write(kw)
-            return "Record Updated Successfully"
+        r = request.env['hospital.appointment'].sudo().search([('id','=',obj)])
+        if r:
+            record = r.sudo().write(request.jsonrequest)
+            record = request.env['hospital.appointment'].sudo().search([('id','=',obj)])
+            print(request.jsonrequest,record.read())
+            return Response(json.dumps(record.read(),default=date_utils.json_default ),content_type='application/json',status=200) 
         else:
-            return "Record doesn't exists"
-    @http.route('/hospital/appointments/<model("hospital.appointment"):obj>/', type='json', auth='public', methods=['DELETE'], crpf='False')
+            return Response(json.dumps("No record Found"),content_type='application/json',status=200)
+    @http.route('/hospital/appointments/<int:obj>/',  auth='public', methods=['DELETE'], csrf=False)
     def delete_appointments(self, obj, **kw):
-        if self.env['hospital.appointment'].sudo().search([('id','=',obj)]):
-            record = self.env['hospital.appointment'].sudo().search([('id','=',obj)])
+        if request.env['hospital.appointment'].sudo().search([('id','=',obj)]):
+            record = request.env['hospital.appointment'].sudo().search([('id','=',obj)])
             record.unlink()
-            return "Record Updated Successfully"
+            return Response(json.dumps(True),content_type='application/json',status=200)
         else:
-            return "Not exists"
+            return Response(json.dumps(False),content_type='application/json',status=200)

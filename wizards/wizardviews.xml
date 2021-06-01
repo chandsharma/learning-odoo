@@ -16,7 +16,7 @@
                     <!-- <field name="patient_assigned" /> -->
                 </group>
                     <footer>
-                        <button name="create"
+                        <button name="add_appointment"
                             string="Add"
                             type="object"
                             class="oe_highlight"
