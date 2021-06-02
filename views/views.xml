@@ -144,7 +144,7 @@
               width='70px'
               class="oe_avatar"/>
           <field name="doc_id" />
-          <field name="time" widget="float_time"/>
+          <field name="time" />
           <field name="discription" />
           <field name="amount" />
           <field name="staatus" />
@@ -166,7 +166,7 @@
             <group>
               <field name="pat_id" />
               <field name="doc_id" />
-              <field name="time" widget="float_time"/>
+              <field name="time" />
               <field name="discription" />
               <field name="amount" />
               <field name="staatus" />
